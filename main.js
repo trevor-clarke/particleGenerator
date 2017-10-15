@@ -14,7 +14,6 @@ function setup() {
     window.setInterval(animate, 10);
 }
 
-
 function animate() {
     clearCanvas();
     updateParticles();
@@ -49,9 +48,9 @@ function updateParticles() {
         particles[i].x += p.vX;
         particles[i].y += p.vY;
         particles[i].z += p.vZ;
-        if(offscreen(particles[i])){
-          removeParticle(i);
-          createParticle();
+        if (offscreen(particles[i])) {
+            removeParticle(i);
+            createParticle();
         }
     }
     sortParticles();
@@ -63,17 +62,17 @@ function sortParticles() {
     });
 }
 
-function lastColour(){
-  return particles[particles.length-1].c;
+function lastColour() {
+    return particles[particles.length - 1].c;
 }
 
-function offscreen(a){
-  var pad = particleSize(a.z);
-  if (!(a.z > 0 && a.y > 0 - pad && a.y < height + pad && a.x > 0 - pad && a.x < width + pad)) {
-    return true;
-  } else{
-    return false;
-  }
+function offscreen(a) {
+    var pad = particleSize(a.z);
+    if (!(a.z > 0 && a.y > 0 - pad && a.y < height + pad && a.x > 0 - pad && a.x < width + pad)) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function removeParticle(i) {
@@ -90,23 +89,23 @@ function randomColour() {
 function particleSize(a) {
     return startSize * (Math.pow(a, 1.5));
 }
-function centerCircle(){
-  c.beginPath();
-  c.arc((width / 2) - (startSize / 2), (height / 2) - (startSize / 2), startSize, 0, 2 * Math.PI);
-  c.stroke();
+
+function centerCircle() {
+    c.beginPath();
+    c.arc((width / 2) - (startSize / 2), (height / 2) - (startSize / 2), startSize, 0, 2 * Math.PI);
+    c.stroke();
 }
 
-function drawParticle(p){
-  c.beginPath();
-  c.fillStyle = p.c;
-  c.arc(p.x, p.y, particleSize(p.z), 0, 2 * Math.PI);
-  c.fill();
+function drawParticle(p) {
+    c.beginPath();
+    c.fillStyle = p.c;
+    c.arc(p.x, p.y, particleSize(p.z), 0, 2 * Math.PI);
+    c.fill();
 }
 
 function clearCanvas() {
     c.clearRect(0, 0, width, height);
 }
-
 window.onresize = function() {
     height = window.innerHeight;
     width = window.innerWidth;
